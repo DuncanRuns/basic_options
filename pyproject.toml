@@ -19,5 +19,5 @@ classifiers = [
 ]
 
 [project.urls]
-"Homepage" = "https://github.com/DuncanRuns/BasicOptions"
-"Bug Tracker" = "https://github.com/DuncanRuns/BasicOptions/issues"
+"Homepage" = "https://github.com/DuncanRuns/basic_options"
+"Bug Tracker" = "https://github.com/DuncanRuns/basic_options/issues"
