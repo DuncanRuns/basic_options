@@ -6,9 +6,9 @@ This package provides a basic way to create configuration files, especially for 
 ```python
 # EXAMPLE USAGE
 
-# Create an options class inheriting BasicOptions, and override the _set_defaults function
+# Create an options class inheriting BasicOptions, and override the set_defaults function
 class ExampleOptions(BasicOptions):
-    def _set_defaults(self):
+    def set_defaults(self) -> None:
         self.value_a = 1
         self.valueB = "2"
         self.c = [3, 4, 5]
@@ -26,7 +26,7 @@ example["delta"] += 0.6666
 print(example.get_option("delta"))
 print(example["c"])
 
-# Loading and saving options can be done easily with .save_file() and .load_file()
+# Loading and saving options can be done easily with .save_file(), .try_load_file() and .load_file()
 # example2 = ExampleOptions().load_file("old_save.json").
 # example2.save_file("new_save.json")
 # Retreiving dictionaries and json strings with .to_json() and .to_dict()

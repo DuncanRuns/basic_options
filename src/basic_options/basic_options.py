@@ -1,5 +1,5 @@
 import json
-from typing import Any, Dict, List
+from typing import Any, Dict
 from abc import ABC, abstractmethod
 from typing_extensions import Self
 
@@ -94,6 +94,21 @@ class BasicOptions(ABC):
             self.load_json(f.read())
         return self
 
+    def try_load_file(self, file_path: str) -> Self:
+        """Loads a file containing a json string into the options object. This function will
+
+        Args:
+            file_path (str): The path of the file to load.
+
+        Returns:
+            Self: The options object.
+        """
+        try:
+            self.load_file(file_path)
+        except:
+            pass
+        return self
+
     def _json(self) -> dict:
         return {"type": self.__class__.__name__, "options": self.to_dict()}
 
@@ -167,7 +182,7 @@ if __name__ == "__main__":
     print(example.get_option("delta"))
     print(example["c"])
 
-    # Loading and saving options can be done easily with .save_file() and .load_file()
+    # Loading and saving options can be done easily with .save_file(), .try_load_file() and .load_file()
     # example2 = ExampleOptions().load_file("old_save.json").
     # example2.save_file("new_save.json")
     # Retreiving dictionaries and json strings with .to_json() and .to_dict()
