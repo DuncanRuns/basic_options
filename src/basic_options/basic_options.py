@@ -14,9 +14,28 @@ class BasicOptions(ABC):
 
     @abstractmethod
     def set_defaults(self) -> None:
-        """Sets the default values. This function needs to be overriden by any class inheriting BasicOptions.
+        """Sets the default values for the first time. This function needs to be overriden by any class inheriting BasicOptions.
+
+        This function does not update wrappers, please use set_defaults_and_wrappers.
         """
         pass
+
+    def set_defaults_and_wrappers(self) -> None:
+        """Resets all options to their default values and updates the wrappers.
+        """
+        for key in self._defaults.keys():
+            self.set_option(key, self.get_default(key))
+
+    def get_default(self, option: str) -> Any:
+        """Gets the default value of the specified option.
+
+        Args:
+            option (str): The name of the option.
+
+        Returns:
+            Any: The default value of the option.
+        """
+        return self._defaults[option]
 
     def set_option_wrapper(self, option: str, wrapper: Any) -> None:
         """Sets a wrapper object for an option, and sets the value in the wrapper to the option's current value.
@@ -176,7 +195,7 @@ if __name__ == "__main__":
 
     # Change a value in the options using .set_option() or item notation
     example["delta"] += 0.6666
-    # You can do `example.delta += 0.6666`, however that would not activate the wrappers from .set_option_wrappers()
+    # You can do `example.delta += 0.6666`, however that would not activate the wrappers from .set_option_wrapper()
 
     # Retreiving options can be done with .get_option(), or item notation
     print(example.get_option("delta"))
